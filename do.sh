@@ -31,6 +31,5 @@ cp ./parse.html ./parse2.html
 
 sed 's/head>/head><script\ type=\"text\/javascript\"\ src=\"cordova\.js\"><\/script><script\ type=\"text\/javascript\"\ src=\"js\/index.js\"><\/script><script\ type=\"text\/javascript\">app\.initialize();<\/script>/g' parse2.html > parse.html 
 
-
-cordova build 
+cordova run
 
