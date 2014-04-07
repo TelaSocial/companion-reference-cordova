@@ -31,6 +31,3 @@ sed 's/head>/head><script\ type=\"text\/javascript\"\ src=\"cordova\.js\"><\/scr
 
 cordova build 
 
-
-
-
