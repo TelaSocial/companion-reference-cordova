@@ -23,11 +23,14 @@ sed 's/index/parse/g' config2.xml > config.xml
 
 cp -r ../companion-tests/parse-collect/* ./www
 
+cp ../parse.js ./www
+
 cd www
 
 cp ./parse.html ./parse2.html
 
 sed 's/head>/head><script\ type=\"text\/javascript\"\ src=\"cordova\.js\"><\/script><script\ type=\"text\/javascript\"\ src=\"js\/index.js\"><\/script><script\ type=\"text\/javascript\">app\.initialize();<\/script>/g' parse2.html > parse.html 
+
 
 cordova build 
 
