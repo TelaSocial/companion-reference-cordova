@@ -1,3 +1,4 @@
+#!/bin/bash
 cordova create app --name CompanionApp --id com.telasocial.companion
 
 #cordova platform add android
@@ -12,9 +13,16 @@ cordova plugin add https://github.com/Red-Folder/bgs-sample
 
 cordova platform add android
 
-cp ./plugins/nl.x-services.plugins.calendar/www/Calendar.js ./www/Calendar.js
+#cp ./plugins/nl.x-services.plugins.calendar/www/Calendar.js ../www/Calendar.js
+
+cp -r ../www/* ./www
+
+cp config.xml config2.xml 
+
+sed 's/index/grade\/index/g' config2.xml > config.xml
 
 cordova build 
+
 
 
 
