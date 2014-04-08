@@ -12,6 +12,9 @@ cordova plugin add https://github.com/Red-Folder/bgs-sample
 
 cordova platform add android
 
+cp ./plugins/nl.x-services.plugins.calendar/www/Calendar.js ./www/Calendar.js
+
 cordova build 
+
 
 
