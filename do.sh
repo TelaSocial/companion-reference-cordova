@@ -23,8 +23,6 @@ sed 's/index/parse/g' config2.xml > config.xml
 
 cp -r ../companion-tests/parse-collect/* ./www
 
-cp ../parse.js ./www
-
 cd www
 
 cp ./parse.html ./parse2.html
