@@ -17,7 +17,7 @@ cordova platform add android
 
 cp -r ../www/* ./www
 
-cd www
+cp ../MyService.java ./platforms/android/src/com/red_folder/phonegap/plugin/backgroundservice/sample/MyService.java
 
 cordova run
 

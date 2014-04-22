@@ -1,12 +1,25 @@
 package com.red_folder.phonegap.plugin.backgroundservice.sample;
-
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.ArrayList;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.util.Log;
+
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.provider.AlarmClock;
+ 
+// For network
+import java.net.*;
+import java.io.*;
+
+//import java.util.Calendar;
+
+//marcio test
+import android.os.Vibrator;
 
 import com.red_folder.phonegap.plugin.backgroundservice.BackgroundService;
 
@@ -16,23 +29,41 @@ public class MyService extends BackgroundService {
 	
 	private String mHelloTo = "World";
 
-	@Override
-	protected JSONObject doWork() {
-		JSONObject result = new JSONObject();
-		
-		try {
-			SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss"); 
-			String now = df.format(new Date(System.currentTimeMillis())); 
+  @Override
+  protected JSONObject doWork() {
+    JSONObject result = new JSONObject();
+    
+    Log.d(TAG, "marcio do work...3 " );
 
-			String msg = "Hello " + this.mHelloTo + " - its currently " + now;
-			result.put("Message", msg);
+	try { 
+		Log.d(TAG, "marcio loading.. " );
+		URL yahoo = new URL("http://telalabs.appspot.com/profeed/tab");
+		URLConnection yc = yahoo.openConnection();
+		BufferedReader in = new BufferedReader( new InputStreamReader(yc.getInputStream(),"UTF-8"));
+		String inputLine;
 
-			Log.d(TAG, msg);
-		} catch (JSONException e) {
-		}
-		
-		return result;	
-	}
+		while ((inputLine = in.readLine()) != null)  { 
+			Log.d(TAG, "marcio... processing remote line: "+inputLine+"===" );
+
+			if(inputLine.indexOf("aparece")>-1) { 
+				Intent i = new Intent();
+				PackageManager manager = getPackageManager();
+				i = manager.getLaunchIntentForPackage("io.cordova.hellocordova");
+				i.addCategory(Intent.CATEGORY_LAUNCHER);
+				this.startActivity(i);
+				Vibrator vibrator = (Vibrator) getSystemService(this.VIBRATOR_SERVICE);
+				vibrator.vibrate(50000);
+			} 
+		} 
+
+		in.close();
+		//result.put("marcio - Message", msg);
+	} catch (IOException ee) { 
+		Log.d(TAG, "marcio, no network --- "+ ee);
+	} 
+
+    return result;  
+  }
 
 	@Override
 	protected JSONObject getConfig() {
